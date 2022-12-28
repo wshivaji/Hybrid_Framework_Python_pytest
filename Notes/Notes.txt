@@ -1,0 +1,99 @@
+
+
+
+Phase 1:
+1. Analyse Application, Technology and skillset of team,Choose test cases.
+
+first priority:
+- re test cases.
+- regression test cases.
+- test cases needed data (data driven test cases).
+- test cases which can be automatable.
+- automation tools also need to choose.
+
+
+phase 2: Design and Execution of Framework
+
+phase 3: Execution
+
+phase 4: Maintainance of Test Cases
+
+
+# Create New Project and install required packages and plugins:
+    1. selenium: Selenium Libraries
+    2. pytest:   Python Pytest Libraries
+    3. pytest-html: Pytest HTML Reports
+    4. pytest-xdist: Run Tests Parallel
+    5. openpyxl:     MS-Excel Support
+    6. Allure-pytesr: to generate allure reports.
+
+
+# Create A Project Structure
+
+Project Name
+|
+|- pageObjects (Package)
+|
+|- testCases (Package)
+|
+|- utilities (Package)
+|
+|- TestData (Folder)
+|
+|- Configuration (Folder)
+|
+|- Logs (Folder)
+|
+|- Screenshots (Folder)
+|
+|- Reports (Folder)
+|
+|* Run.bat
+
+
+# Automating Login Test  case
+
+1. Create LoginPage Object Class under "pageObjects" package
+2. Create LoginTest under "testCases" package
+3. Create conftest.py under "testCases" package
+
+# Capture Screenshots on Failures
+
+1. Update Login Test with Screenshot under "testCases" package
+
+# Read common values from ini file
+1. Add "config.ini" file in "Configurations" Folder.
+2. Create "readProperties.py" utilities file under utilities package to read common data
+3. replace hard coded values in login test case.
+
+# Adding logs to test case.
+1. Add customerLogger.py under utilities package.
+2. Add logs to Login test case.
+
+# Run Tests on Desired Browser/Cross Browser/Parallel
+1. update contest.py with required Fixtures which will accept command line argument(browser name)
+2. pass browser name as argument in command line
+
+To run tests on desired browser:
+Commands:
+pytest -s -v testCases/test_login.py --browser chrome
+pytest -s -v testCases/test_login.py --browser firefox
+
+To run tests parallel
+pytest -s -v -n = 3 testCases/test_login.py --browser chrome
+pytest -s -v -n = 3 testCases/test_login.py --browser firefox
+
+# Generate pytest HTML Reports
+1. Update conftest.py with pytest hooks.
+2. To Generate HTML reports run below commands.
+
+pytest -s -v -n = 3 --html = Reports\report.html testCases/test_login.py --browser chrome
+
+
+# Automating Data Driven Test Cases
+
+1. Prepare Test Data in Excel Sheet, place the excel sheet inside the TestData foleder.
+2. Create "ExcelUtils.py" utility class under Utilities package.
+3. Create LoginDataDrivenTest.py under testCases
+4. Run the TestCases.
+
